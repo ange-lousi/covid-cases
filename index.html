@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Covid-19 Cases</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.7.1/dist/svgMap.min.css" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!--Navbar-->
+  <nav class="navbar fixed">
+    <button class="navbar-toggler toggler-example ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span><i
+          class="fas fa-bars fa-1x"></i></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+      <ul class="navbar-nav mr-auto">
+        <li id="Home" onclick="homePage();" class="nav-item">Cases</li>
+        <li id="Map" onclick="mapPage();" class="nav-item">Map</li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- covid cases -->
+  <div id="intro" class="about">
+    <section>
+        <div class="section-heading container">
+            <h4>Current covid cases <span id="country"></span></h4>
+            <div id="last-updated"></div>
+            <div class="the-search-box">
+                <!-- can use if you want onkeyup -->
+              <input class="search-control" type="text" id="mySearch" placeholder="Enter country name...">
+              <button type="submit" class="search-btn btn" id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+
+      <div class="page-section container">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item first-service">
+              <div class="icon"></div>
+              <h4>Active Cases</h4>
+              <span class="data-para" id="active"></span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item second-service">
+              <div class="icon"></div>
+              <h4>Total Cases</h4>
+              <span class="data-para" id="cases"></span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item third-service">
+              <div class="icon"></div>
+              <h4>Critical Cases</h4>
+              <span class="data-para" id="critical"></span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item fourth-service">
+              <div class="icon"></div>
+              <h4>Total Deaths</h4>
+              <span class="data-para" id="deaths"></span>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- second row -->
+
+        <div class="row">
+          <br>
+        </div>
+
+        <div class="row btm-row">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item first-service">
+              <div class="icon"></div>
+              <h4>Recovered Cases</h4>
+              <span class="data-para" id="recovered"></span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item second-service">
+              <div class="icon"></div>
+              <h4>Total Test Done</h4>
+              <span class="data-para" id="tests"></span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item second-service">
+              <div class="icon"></div>
+              <h4>Cases Today</h4>
+              <span class="data-para" id="today"></span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item fourth-service">
+              <div class="icon"></div>
+              <h4>Today Recovered</h4>
+              <span class="data-para" id="today-recovered"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- map -->
+  <div id="mapSection" class="container">
+    <div class="section-heading container">
+        <h4>Map of covid cases</h4>
+      </div>
+      <div class="container">
+    <div id="svgMap"  class="themap" style="cursor: all-scroll"></div>
+</div>
+  </div>
+
+  <!-- footer -->
+
+  <footer class="mt-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copyright-text">
+                    <p>&copy; Angenita Lousi</p>
+                </div>
+            </div>
+            <!-- <div class="col-md-6">
+                <div class="">
+                    <ul>
+                        <li>
+                            <a href="https://covid19.who.int/"><i class="bi bi-newspaper"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</footer>
+
+
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.7.1/dist/svgMap.min.js"></script>
+  <script src="./alou149.js"></script>
+
+
+</body>
+
+</html>
